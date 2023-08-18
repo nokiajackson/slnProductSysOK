@@ -1,0 +1,68 @@
+﻿@model prjProductSys.ViewModels.VMCategoryProducts
+
+@{
+    ViewData["Title"] = "BookList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@Model.categoryName</h1>
+<form action="@Url.Action("BookList")">
+<div class="row mb-5">
+    <div class="col-8"> 
+          <select name="CategoryId" class="form-control">
+                    @foreach(var item in Model.category)
+                    {
+                        <option value="@item.CategoryId">@item.CategoryName</option>
+                    }
+           </select>
+         
+    </div>
+    <div class="col-4"><input type="submit" value="查詢" class="btn btn-primary" /></div>
+</div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.products.FirstOrDefault().ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.products.FirstOrDefault().ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.products.FirstOrDefault().Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.products.FirstOrDefault().Img)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.products) {
+        <tr>
+                        <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <img  src="~/Images/@item.Img" class="img-thumbnail" style="width:180px;">
+            </td>
+            <td>
+                 <a asp-action="CommentManager" asp-route-productId="@item.ProductId" 
+                       class="btn btn-light">評論管理</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+

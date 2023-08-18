@@ -1,0 +1,25 @@
+﻿@model IEnumerable<prjProductSys.Models.TProduct>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_BannerLayout.cshtml";
+}
+
+<h1>@ViewBag.CategoryName</h1>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-12 col-md-4 mb-2">
+            <div class="card" style="width:100%;">
+                <img class="card-img-top" src="~/Images/@item.Img" style="height: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">@item.ProductName</h5>
+                    <a asp-controller="Member" asp-action="CommentCreate" asp-route-productId="@item.ProductId" 
+                       class="btn btn-light">評論新增</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
